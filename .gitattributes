@@ -1,0 +1,2 @@
+ocr/ocr_output/*.json filter=lfs diff=lfs merge=lfs -text
+*.json filter=lfs diff=lfs merge=lfs -text
