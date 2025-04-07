@@ -17,8 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->encryptCookies(except: ['appearance']);
 
         $middleware->web(append: [
-            HandleAppearance::class,
-            HandleInertiaRequests::class,
+            // HandleAppearance::class,
+            // HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
     })

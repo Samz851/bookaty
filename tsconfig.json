@@ -112,6 +112,9 @@
             "@/*": ["./resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         },
+        "types": [
+            "vite/client"
+        ],
         "jsx": "react-jsx",
         "resolveJsonModule": true,
     },

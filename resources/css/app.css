@@ -1,159 +1,169 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@plugin 'tailwindcss-animate';
-
-@source '../views';
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-    --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
-    --radius-lg: var(--radius);
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-sm: calc(var(--radius) - 4px);
-
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-
-    --color-popover: var(--popover);
-    --color-popover-foreground: var(--popover-foreground);
-
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
-
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
-
-    --color-chart-1: var(--chart-1);
-    --color-chart-2: var(--chart-2);
-    --color-chart-3: var(--chart-3);
-    --color-chart-4: var(--chart-4);
-    --color-chart-5: var(--chart-5);
-
-    --color-sidebar: var(--sidebar);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-ring: var(--sidebar-ring);
+@media print {
+	body {
+		margin: 0 !important;
+	}
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-    }
+.main-container {
+	font-family: 'Lato';
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-:root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.87 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+.ck-content {
+	font-family: 'Lato';
+	line-height: 1.6;
+	word-break: break-word;
 }
 
-.dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.145 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.396 0.141 25.723);
-    --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: oklch(0.269 0 0);
-    --input: oklch(0.269 0 0);
-    --ring: oklch(0.439 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.985 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+.editor-container_include-block-toolbar {
+	margin-left: 42px;
 }
 
-@layer base {
-    * {
-        @apply border-border;
-    }
+.editor-container_balloon-editor .editor-container__editor {
+	min-width: 795px;
+	max-width: 795px;
+}
 
-    body {
-        @apply bg-background text-foreground;
-    }
+.ck-content h3.category {
+	font-family: 'Oswald';
+	font-size: 20px;
+	font-weight: bold;
+	color: #555;
+	letter-spacing: 10px;
+	margin: 0;
+	padding: 0;
+}
+
+.ck-content h2.document-title {
+	font-family: 'Oswald';
+	font-size: 50px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.ck-content h3.document-subtitle {
+	font-family: 'Oswald';
+	font-size: 20px;
+	color: #555;
+	margin: 0 0 1em;
+	font-weight: bold;
+	padding: 0;
+}
+
+.ck-content p.info-box {
+	--background-size: 30px;
+	--background-color: #e91e63;
+	padding: 1.2em 2em;
+	border: 1px solid var(--background-color);
+	background: linear-gradient(
+			135deg,
+			var(--background-color) 0%,
+			var(--background-color) var(--background-size),
+			transparent var(--background-size)
+		),
+		linear-gradient(
+			135deg,
+			transparent calc(100% - var(--background-size)),
+			var(--background-color) calc(100% - var(--background-size)),
+			var(--background-color)
+		);
+	border-radius: 10px;
+	margin: 1.5em 2em;
+	box-shadow: 5px 5px 0 #ffe6ef;
+}
+
+.ck-content blockquote.side-quote {
+	font-family: 'Oswald';
+	font-style: normal;
+	float: right;
+	width: 35%;
+	position: relative;
+	border: 0;
+	overflow: visible;
+	z-index: 1;
+	margin-left: 1em;
+}
+
+.ck-content blockquote.side-quote::before {
+	content: '“';
+	position: absolute;
+	top: -37px;
+	left: -10px;
+	display: block;
+	font-size: 200px;
+	color: #e7e7e7;
+	z-index: -1;
+	line-height: 1;
+}
+
+.ck-content blockquote.side-quote p {
+	font-size: 2em;
+	line-height: 1;
+}
+
+.ck-content blockquote.side-quote p:last-child:not(:first-child) {
+	font-size: 1.3em;
+	text-align: right;
+	color: #555;
+}
+
+.ck-content span.marker {
+	background: yellow;
+}
+
+.ck-content span.spoiler {
+	background: #000;
+	color: #000;
+}
+
+.ck-content span.spoiler:hover {
+	background: #000;
+	color: #fff;
+}
+
+.ck-content pre.fancy-code {
+	border: 0;
+	margin-left: 2em;
+	margin-right: 2em;
+	border-radius: 10px;
+}
+
+.ck-content pre.fancy-code::before {
+	content: '';
+	display: block;
+	height: 13px;
+	background: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NCAxMyI+CiAgPGNpcmNsZSBjeD0iNi41IiBjeT0iNi41IiByPSI2LjUiIGZpbGw9IiNGMzZCNUMiLz4KICA8Y2lyY2xlIGN4PSIyNi41IiBjeT0iNi41IiByPSI2LjUiIGZpbGw9IiNGOUJFNEQiLz4KICA8Y2lyY2xlIGN4PSI0Ny41IiBjeT0iNi41IiByPSI2LjUiIGZpbGw9IiM1NkM0NTMiLz4KPC9zdmc+Cg==);
+	margin-bottom: 8px;
+	background-repeat: no-repeat;
+}
+
+.ck-content pre.fancy-code-dark {
+	background: #272822;
+	color: #fff;
+	box-shadow: 5px 5px 0 #0000001f;
+}
+
+.ck-content pre.fancy-code-bright {
+	background: #dddfe0;
+	color: #000;
+	box-shadow: 5px 5px 0 #b3b3b3;
+}
+
+.ac_template_string {
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #000;
+	font-weight: bold;
+}
+
+.ac_template_string:hover {
+	padding: 6px;
+	border-color: #f30505;
 }

@@ -15,6 +15,8 @@ export default defineConfig({
         hmr: {
           host: 'localhost'
         },
+        allowedHosts: true,
+        cors: true,
      },
      build: {
         sourcemap: true,
