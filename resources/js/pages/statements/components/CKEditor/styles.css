@@ -1,0 +1,11 @@
+.ac_template_string {
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #000;
+	font-weight: bold;
+}
+
+.ac_template_string:hover {
+	padding: 6px;
+	border-color: #f30505;
+}
