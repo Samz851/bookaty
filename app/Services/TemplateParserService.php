@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Tag;
-use App\Models\TransRecord;
-use App\Models\Account;
-use App\Models\Formula;
+use App\Models\Tenant\Tag;
+use App\Models\Tenant\TransRecord;
+use App\Models\Tenant\Account;
+use App\Models\Tenant\Formula;
 use Illuminate\Support\Facades\Log;
 
 class TemplateParserService

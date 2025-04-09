@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Contracts\AccountService as AccountServiceContract;
 use App\Helpers\ArrayFormatters;
-use App\Models\Account;
-use App\Models\AccountsBranch;
+use App\Models\Tenant\Account;
+use App\Models\Tenant\AccountsBranch;
 use BadMethodCallException;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
