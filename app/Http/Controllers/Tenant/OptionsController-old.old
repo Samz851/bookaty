@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Options;
+use App\Traits\HasFileUploads;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+
+class OptionsControllerA extends Controller
+{
+    use HasFileUploads;
+
+    public function index()
+    {
+        return response(Options::all());
+    }
+
+    public function store( Request $request ): Response
+    {
+        Log::info($request->file(), [__LINE__, __FILE__]);
+        if ( $request->file('logo_file')) {
+            $directory = 'logos/' . $request->user()->organization->id;
+            $file = $request->file('logo_file');
+            if ( $fileUploadedData = $this->uploadSingleFile($file, $directory) ) {
+                $request->merge(['logo' => $fileUploadedData['filepath']]);
+            }
+        }
+        $options = $request->user()->organization->options()->create($request->all());
+        return response($options);
+    }
+
+    public function show( Options $options ): Response
+    {
+        Log::info([typeof($options)], [__LINE__, __FILE__]);
+
+        return response($options);
+    }
+
+    
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Options $options)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Options $options)
+    {
+        //
+    }
+}

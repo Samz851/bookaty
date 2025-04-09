@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Account;
-use App\Models\AccountsBranch;
+use App\Models\Tenant\Account;
+use App\Models\Tenant\AccountsBranch;
 use Illuminate\Support\Collection;
 
 class AccountsBalanceService
