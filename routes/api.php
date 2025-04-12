@@ -31,8 +31,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-foreach (config('tenancy.central_domains') as $domain) {
-    Route::domain($domain)->group(function () {
+// foreach (config('tenancy.central_domains') as $domain) {
+//     Route::domain($domain)->group(function () {
         Route::get('/generateBalances', [TransactionsController::class, 'generateBalances']);
         Route::get('/getTagMembers', [TagController::class, 'getTagMembers']);
         Route::get('/getTagBalance', [TagController::class, 'getTagBalance']);
@@ -60,7 +60,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::get('/removeLeafs', [AccountsBranchController::class, 'removeLeafs']);
             Route::get('/accounts/select', [AccountController::class, 'getSelect']);
             Route::get('/users/autologin', [UserController::class, 'autlogin']);
-            Route::get('/users/authenticated', [UserController::class, 'isAuthenticated']);
+            // Route::get('/users/authenticated', [UserController::class, 'isAuthenticated']);
         });
-    });
-}
+//     });
+// }
