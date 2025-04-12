@@ -24,9 +24,10 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 Route::middleware([
     InitializeTenancyBySubdomain::class,
     'api',
+    'auth:sanctum',
     // PreventAccessFromCentralDomains::class,
 ])->prefix('api')
-->group(base_path('routes/apiten.php'));
+->group(base_path('routes/api.php'));
 
 Route::middleware([
     InitializeTenancyBySubdomain::class,
@@ -47,6 +48,6 @@ Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function 
     Route::get('/csrf-cookie', [CsrfCookieController::class, 'show'])
         ->middleware([
             'web',
-            InitializeTenancyByDomain::class // Use tenancy initialization middleware of your choice
+            InitializeTenancyBySubdomain::class // Use tenancy initialization middleware of your choice
         ])->name('sanctum.csrf-cookie');
 });
