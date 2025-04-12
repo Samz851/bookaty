@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Enums\AccountTransactionTypes;
-use App\Models\Tenant\Account;
-use App\Models\Tenant\AccountBalance;
-use App\Models\Tenant\TransRecord;
+use App\Models\Account;
+use App\Models\AccountBalance;
+use App\Models\TransRecord;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;

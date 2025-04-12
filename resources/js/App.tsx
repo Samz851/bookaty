@@ -41,8 +41,9 @@ const App: React.FC = () => {
     const API_URL = "https://api.finefoods.refine.dev";
     const LARAVEL_API_URL = `${ PROD 
                                 ? VITE_PROD_APP_URL
-                                : VITE_DEV_APP_URL
+                                : window.location.origin
                             }/api`;
+    console.log(LARAVEL_API_URL, PROD, VITE_PROD_APP_URL, VITE_DEV_APP_URL, window.location);
     const laravelDataProvider = jsonServerDataProvider(LARAVEL_API_URL);
     const dataProvider = jsonServerDataProvider(API_URL);
 

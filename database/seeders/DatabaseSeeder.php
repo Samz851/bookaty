@@ -6,6 +6,7 @@ use App\Models\Organization;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,10 +23,11 @@ class DatabaseSeeder extends Seeder
         // ]);
         $organization = Organization::factory()->create();
         $domain = $organization->domains()->create([
-            'domain' => 'acme.accountak.local',
+            'domain' => 'acme',
         ]);
         $organization->run(function () {
             $user = User::factory()->create();
         });
+        Artisan::call('tenants:seed --tenants=' . $organization->id);
     }
 }

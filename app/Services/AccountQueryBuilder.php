@@ -2,8 +2,8 @@
 namespace App\Services;
 
 use App\Models\BaseAccount;
-use App\Models\Tenant\Account;
-use App\Models\Tenant\AccountsBranch;
+use App\Models\Account;
+use App\Models\AccountsBranch;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\CursorPaginator;

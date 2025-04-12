@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\Tax;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

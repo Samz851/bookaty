@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Enums\BaseAccountTaxonomy;
 use App\Helpers\ArrayFormatters;
-use App\Models\Tenant\Account;
-use App\Models\Tenant\Tag;
+use App\Models\Account;
+use App\Models\Tag;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 

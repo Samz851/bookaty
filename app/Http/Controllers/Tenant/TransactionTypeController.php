@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\TransactionType;
+use App\Models\TransactionType;
 
 class TransactionTypeController extends Controller
 {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\Tag;
+use App\Models\Tag;
 use App\Services\TagService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
