@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\Account;
-use App\Models\Tenant\AccountsBranch;
-use App\Models\Tenant\Formula;
-use App\Models\Tenant\Tag;
-use App\Models\Tenant\TransRecord;
+use App\Models\Account;
+use App\Models\AccountsBranch;
+use App\Models\Formula;
+use App\Models\Tag;
+use App\Models\TransRecord;
 use App\Services\TagService;
 use ChrisKonnertz\StringCalc\StringCalc;
 use Illuminate\Http\Request;

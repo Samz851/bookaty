@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AccountsBranchController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\FormulaController;
+use App\Http\Controllers\Tenant\AccountController;
+use App\Http\Controllers\Tenant\AccountsBranchController;
+use App\Http\Controllers\Tenant\CompanyController;
+use App\Http\Controllers\Tenant\ContactController;
+use App\Http\Controllers\Tenant\FormulaController;
 use App\Http\Controllers\OptionsController;
-use App\Http\Controllers\StatementController;
-use App\Http\Controllers\StatementTemplateController;
-use App\Http\Controllers\TagController;
-use App\Http\Controllers\TaxesController;
-use App\Http\Controllers\TransactionsController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Tenant\StatementController;
+use App\Http\Controllers\Tenant\StatementTemplateController;
+use App\Http\Controllers\Tenant\TagController;
+use App\Http\Controllers\Tenant\TaxesController;
+use App\Http\Controllers\Tenant\TransactionsController;
+use App\Http\Controllers\Tenant\UserController;
 use App\Models\AccountsBranch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

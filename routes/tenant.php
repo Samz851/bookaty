@@ -6,6 +6,7 @@ use App\Http\Controllers\Tenant\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
+use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 /*
@@ -21,7 +22,14 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 */
 
 Route::middleware([
-    InitializeTenancyByDomain::class,
+    InitializeTenancyBySubdomain::class,
+    'api',
+    // PreventAccessFromCentralDomains::class,
+])->prefix('api')
+->group(base_path('routes/apiten.php'));
+
+Route::middleware([
+    InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
     'web',
 

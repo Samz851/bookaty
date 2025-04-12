@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Helpers\ArrayFormatters;
-use App\Models\Tenant\Account;
-use App\Models\Tenant\AccountsBranch;
+use App\Models\Account;
+use App\Models\AccountsBranch;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

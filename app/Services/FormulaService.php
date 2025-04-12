@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Tenant\Formula;
+use App\Models\Formula;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 

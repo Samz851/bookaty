@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\Company;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 

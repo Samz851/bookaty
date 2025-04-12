@@ -19,7 +19,8 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
-        'app.accountak.local'
+        'app.accountak.local',
+        'accountak.local'
     ],
 
     /**
@@ -194,7 +195,7 @@ return [
      * Parameters used by the tenants:seed command.
      */
     'seeder_parameters' => [
-        '--class' => 'DatabaseSeeder', // root seeder class
+        '--class' => 'DatabaseTenantSeeder', // root seeder class
         // '--force' => true, // This needs to be true to seed tenant databases in production
     ],
 ];

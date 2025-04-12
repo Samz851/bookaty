@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\Statement;
-use App\Models\Tenant\StatementTemplate;
-use App\Models\Tenant\Tag;
+use App\Models\Statement;
+use App\Models\StatementTemplate;
+use App\Models\Tag;
 use App\Services\TagService;
 use App\Services\TemplateParserService;
 use Illuminate\Http\Request;

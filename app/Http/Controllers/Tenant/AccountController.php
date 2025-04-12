@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tenant;
 
-use App\Models\Tenant\Account;
+use App\Models\Account;
 use App\Services\AccountServices;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
