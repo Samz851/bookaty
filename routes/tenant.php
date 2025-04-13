@@ -47,6 +47,6 @@ Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function 
     Route::get('/csrf-cookie', [CsrfCookieController::class, 'show'])
         ->middleware([
             'web',
-            InitializeTenancyByDomain::class // Use tenancy initialization middleware of your choice
+            InitializeTenancyBySubdomain::class // Use tenancy initialization middleware of your choice
         ])->name('sanctum.csrf-cookie');
 });
