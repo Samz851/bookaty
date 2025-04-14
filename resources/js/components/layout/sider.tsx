@@ -236,7 +236,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             <Layout.Sider
               style={{
                 height: "100vh",
-                backgroundColor: token.colorBgContainer,
+                backgroundColor: "blue",
                 borderRight: `1px solid ${token.colorBgElevated}`,
               }}
             >
@@ -248,7 +248,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                   justifyContent: "flex-start",
                   alignItems: "center",
                   height: "64px",
-                  backgroundColor: token.colorBgElevated,
+                  backgroundColor: "red",
                 }}
               >
                 <RenderToTitle collapsed={false} />
@@ -272,7 +272,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   }
 
   const siderStyles: React.CSSProperties = {
-    backgroundColor: token.colorBgContainer,
+    backgroundColor: "green",
     borderRight: `1px solid ${token.colorBgElevated}`,
   };
 

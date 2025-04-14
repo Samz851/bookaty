@@ -25,8 +25,10 @@ class DatabaseSeeder extends Seeder
         $domain = $organization->domains()->create([
             'domain' => 'acme',
         ]);
-        $organization->run(function () {
-            $user = User::factory()->create();
+        $organization->run(function (Organization $organization) {
+            $user = User::factory()->create([
+                'organization_id' => $organization->id,
+            ]);
         });
         Artisan::call('tenants:seed --tenants=' . $organization->id);
     }

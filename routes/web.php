@@ -22,11 +22,12 @@ Route::get('/one/two', function () {
     $domain = $organization->domains()->create([
         'domain' => 'sam',
     ]);
-    $organization->run(function () {
+    $organization->run(function (Organization $organization) {
         $user = User::factory()
         ->state([
             'email' => 'sam@example.com',
             'password' => Hash::make('password'),
+            'organization_id' => $organization->id,
             ])
         ->create();
     });
