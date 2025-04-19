@@ -113,7 +113,14 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
       );
 
       const linkStyle: React.CSSProperties =
-        activeItemDisabled && isSelected ? { pointerEvents: "none", backgroundColor: token.purple10 } : {};
+      {
+        color: token.colorBgBase,
+        borderRadius: 0,
+        borderBottom: `1px solid #434141`,
+        backgroundColor: isSelected ? token.purple9 : token.purple10,
+        pointerEvents: activeItemDisabled && isSelected ? "none" : "auto",
+      }
+        // activeItemDisabled && isSelected ? { pointerEvents: "none", backgroundColor: token.purple10 } : {};
 
       return (
         <CanAccess
