@@ -39,10 +39,10 @@ console.log(identity)
   }
 
   return (
-    <AntdLayout.Header style={headerStyles}>
+    <AntdLayout.Header style={headerStyles} className="findme">
       <Space>
         <Space size="middle">
-          {identity.user?.name && <Typography.Text strong>{identity.user.name}</Typography.Text>}
+          {identity.user?.name && <Typography.Text strong>NAME: {identity.user.id}</Typography.Text>}
           {identity.organization?.logo && <Avatar src={`/${identity.organization?.logo}`} alt={identity.user?.name} />}
         </Space>
       </Space>

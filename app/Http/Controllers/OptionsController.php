@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use PhpOption\Option;
+use Stancl\Tenancy\Contracts\Tenant;
 
 class OptionsController extends Controller
 {
@@ -26,12 +27,12 @@ class OptionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): Response
+    public function store(Request $request, Tenant $tenant): Response
     {
         // $request->merge(['id' => $request->user()->organization->options->id]);
         Log::info($request->file(), [__LINE__, __FILE__]);
         if ($request->file('logo_file')) {
-            $directory = 'logos/'.$request->user()->organization->id;
+            $directory = 'logos/'.$tenant->id;
             $file = $request->file('logo_file');
             if ($fileUploadedData = $this->uploadSingleFile($file, $directory)) {
                 $request->merge(['logo' => 'storage/'.$fileUploadedData['filepath']]);
@@ -41,24 +42,21 @@ class OptionsController extends Controller
 
 
         $optionsData = $request->except(['logo', 'logo_file']);
-        $options = Options::where('id', $request->user()->organization->options->id)->update($optionsData);
+        $options = $tenant->options->update($optionsData);
         // $options = $request->user()
         //         ->organization
         //         ->options()
         //         ->update($request->except(['logo', 'logo_file'])->toArray());
                 Log::info([$optionsData, $request->all()], [__LINE__, __FILE__]);
 
-        $onboarded = $request->user()
-                ->organization
+        $onboarded = $tenant
                 ->update([
                     'onboarded' => 1,
                     'logo' => $request->get('logo'),
                 ]);
                 Log::info($request->all(), [__LINE__, __FILE__]);
 
-        return response($request->user()
-        ->organization
-        ->options)->withoutCookie(self::X_ACCOUNTAK_ONBOARDING);
+        return response($tenant->options)->withoutCookie(self::X_ACCOUNTAK_ONBOARDING);
     }
 
     /**
