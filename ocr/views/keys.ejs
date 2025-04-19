@@ -1,0 +1,14 @@
+<h2>API Keys</h2>
+<table>
+  <tr><th>Client</th><th>Key</th><th>Expires</th><th>Enabled</th><th>Usage</th><th>Actions</th></tr>
+  <% keys.forEach(key => { %>
+    <tr>
+      <td><%= key.name %></td>
+      <td><%= key.key %></td>
+      <td><%= key.expires_at %></td>
+      <td><%= key.enabled ? "Yes" : "No" %></td>
+      <td><%= key.usage_count %></td>
+      <td><form method="POST" action="/admin/rotate/<%= key.id %>"><button>Rotate</button></form></td>
+    </tr>
+  <% }) %>
+</table>
