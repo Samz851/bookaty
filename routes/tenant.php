@@ -24,9 +24,10 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 Route::middleware([
     InitializeTenancyBySubdomain::class,
     'api',
+    'auth:sanctum',
     // PreventAccessFromCentralDomains::class,
 ])->prefix('api')
-->group(base_path('routes/apiten.php'));
+->group(base_path('routes/api.php'));
 
 Route::middleware([
     InitializeTenancyBySubdomain::class,
