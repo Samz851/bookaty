@@ -43,6 +43,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   activeItemDisabled = false,
 }) => {
   const { token } = theme.useToken();
+  // console.log('token',token);
   const {
     siderCollapsed,
     setSiderCollapsed,
@@ -112,7 +113,14 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
       );
 
       const linkStyle: React.CSSProperties =
-        activeItemDisabled && isSelected ? { pointerEvents: "none" } : {};
+      {
+        color: token.colorBgBase,
+        borderRadius: 0,
+        borderBottom: `1px solid #434141`,
+        backgroundColor: isSelected ? token.purple9 : token.purple10,
+        pointerEvents: activeItemDisabled && isSelected ? "none" : "auto",
+      }
+        // activeItemDisabled && isSelected ? { pointerEvents: "none", backgroundColor: token.purple10 } : {};
 
       return (
         <CanAccess
@@ -124,9 +132,10 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
           }}
         >
           <Menu.Item
+            className="findme1"
             key={item.key}
             icon={icon ?? (isRoute && <UnorderedListOutlined />)}
-            style={linkStyle}
+            style={{...linkStyle, color: token.colorBgBase}}
           >
             <Link to={route ?? ""} style={linkStyle}>
               {label}
@@ -208,6 +217,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
           border: "none",
           overflow: "auto",
           height: "calc(100% - 72px)",
+          backgroundColor: token.purple10,
         }}
         onClick={() => {
           setMobileSiderOpen(false);
@@ -236,7 +246,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             <Layout.Sider
               style={{
                 height: "100vh",
-                backgroundColor: token.colorBgContainer,
+                backgroundColor: "blue",
                 borderRight: `1px solid ${token.colorBgElevated}`,
               }}
             >
@@ -248,7 +258,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                   justifyContent: "flex-start",
                   alignItems: "center",
                   height: "64px",
-                  backgroundColor: token.colorBgElevated,
+                  backgroundColor: token.purple10,
                 }}
               >
                 <RenderToTitle collapsed={false} />
@@ -272,7 +282,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   }
 
   const siderStyles: React.CSSProperties = {
-    backgroundColor: token.colorBgContainer,
+    backgroundColor: token.purple10,
     borderRight: `1px solid ${token.colorBgElevated}`,
   };
 
@@ -338,7 +348,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             justifyContent: siderCollapsed ? "center" : "flex-start",
             alignItems: "center",
             height: "64px",
-            backgroundColor: token.colorBgElevated,
+            backgroundColor: token.purple10,
             fontSize: "14px",
           }}
         >

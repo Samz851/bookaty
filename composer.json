@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "algolia/algoliasearch-client-php": "^4.0",
+        "aws/aws-sdk-php-laravel": "^3.10",
         "chriskonnertz/string-calc": "^2.0",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
@@ -20,6 +21,7 @@
         "meilisearch/meilisearch-php": "^1.13",
         "predis/predis": "^2.3",
         "stancl/tenancy": "^3.9",
+        "thiagoalessio/tesseract_ocr": "^2.13",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {

@@ -26,7 +26,7 @@ class OrganizationFactory extends Factory
             'address' => $this->faker->address(), 
             'city' => $this->faker->city(),
             'country' => $this->faker->country(),
-            'onboarded' => true,
+            'onboarded' => false,
         ];
     }
 }
