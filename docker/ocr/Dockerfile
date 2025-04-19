@@ -1,0 +1,14 @@
+FROM node:20
+
+RUN apt-get update && apt-get install -y \
+  tesseract-ocr \
+  tesseract-ocr-ara \
+  && apt-get clean
+
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+EXPOSE 8000
+CMD ["node", "app.js"]

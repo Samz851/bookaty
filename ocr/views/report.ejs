@@ -1,0 +1,6 @@
+<h2>Monthly Usage</h2>
+<ul>
+  <% stats.forEach(stat => { %>
+    <li><%= stat.name %>: <%= stat.usage_count %> requests</li>
+  <% }) %>
+</ul>
