@@ -15,6 +15,7 @@ use App\Http\Controllers\Tenant\UserController;
 use App\Models\AccountsBranch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         });
 //     });
 // }
+
+// Webhook routes
+Route::post('webhook', [WebhookController::class, 'handle']);

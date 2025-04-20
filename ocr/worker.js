@@ -8,6 +8,7 @@ const connection = new IORedis('redis://redis:6379');
 const worker = new Worker('ocrQueue', async job => {
   const { imagePath, callbackUrl } = job.data;
   const text = await processOCR(imagePath);
+  console.log('text',text);
 
   if (callbackUrl) {
     try {

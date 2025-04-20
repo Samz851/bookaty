@@ -25,7 +25,7 @@ services:
             - mysql
     ocr-service:
         build:
-            context: './docker/ocr'
+            context: './ocr'
             dockerfile: Dockerfile
         ports:
             - '8000:8000'

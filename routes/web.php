@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 use thiagoalessio\TesseractOCR\TesseractOCR;
+use App\Http\Controllers\WebhookController;
 
 // Route::get('/', function () {
 //     return Inertia::render('welcome');
@@ -18,6 +19,8 @@ use thiagoalessio\TesseractOCR\TesseractOCR;
 //     return view('welcome');
 // })->where('all', '.*')
 // ->name('home');
+Route::post('/webhook', [WebhookController::class, 'handle'])
+->withoutMiddleware([InitializeTenancyBySubdomain::class]);
 Route::get('/one/two', function () {
     $organization = Organization::factory()->create();
     $domain = $organization->domains()->create([

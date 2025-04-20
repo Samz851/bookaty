@@ -5,7 +5,6 @@ import { ocrQueue } from './queue.js';
 import { authenticate, rateLimit } from './auth.js';
 import admin from './admin.js';
 
-app.use(admin);
 const API_KEY = process.env.API_KEY || 'default-key';
 
 // function authenticate(req, res, next) {
@@ -18,10 +17,17 @@ const API_KEY = process.env.API_KEY || 'default-key';
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
+// app.use(admin);
 
-app.post('/ocr', authenticate, rateLimit, upload.array('images', 10), async (req, res) => {
+app.get('/test', (req, res) => {
+  console.log('test');
+  res.json({ success: true, message: 'Hello, world!' });
+});
+
+app.post('/ocr', upload.array('images', 10), async (req, res) => {
   const callbackUrl = req.body.callbackUrl;
-
+  console.log(req.files);
+  console.log(req.images);
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ success: false, message: 'At least one image is required' });
   }
@@ -47,7 +53,7 @@ app.post('/ocr', authenticate, rateLimit, upload.array('images', 10), async (req
 });
 
 // Job status endpoint
-app.get('/ocr/:id', authenticate, rateLimit, async (req, res) => {
+app.get('/ocr/:id', async (req, res) => {
   const { id } = req.params;
   const job = await ocrQueue.getJob(id);
 

@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/src/app
 COPY package.json ./
 RUN npm install
-COPY . .
+# COPY . .
 
 EXPOSE 8000
-CMD ["node", "interval.js"]
+CMD ["node", "app.js"]
