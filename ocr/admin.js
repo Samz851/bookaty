@@ -7,7 +7,7 @@ const admin = express();
 admin.set('view engine', 'ejs');
 
 admin.use(basicAuth({
-  users: { admin: 'supersecure' },
+  users: { admin: 'supersecure' }, // ENV-based in real use
   challenge: true
 }));
 

@@ -23,6 +23,20 @@ services:
             - sail
         depends_on:
             - mysql
+    ocr-service:
+        build:
+            context: './docker/ocr'
+            dockerfile: Dockerfile
+        ports:
+            - '8000:8000'
+        volumes:
+            - './ocr:/usr/src/app'
+            - './ocr/uploads:/usr/src/app/uploads'
+        networks:
+            - sail
+        depends_on:
+            - redis
+    
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
