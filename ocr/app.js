@@ -5,27 +5,66 @@ import { ocrQueue } from './queue.js';
 import { authenticate, rateLimit } from './auth.js';
 import admin from './admin.js';
 
+app.use(admin);
+const API_KEY = process.env.API_KEY || 'default-key';
+
+// function authenticate(req, res, next) {
+//   const key = req.headers['x-api-key'];
+//   if (!key || key !== API_KEY) {
+//     return res.status(401).json({ success: false, message: 'Unauthorized' });
+//   }
+//   next();
+// }
+
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-app.use(admin); // Admin UI
-
 app.post('/ocr', authenticate, rateLimit, upload.array('images', 10), async (req, res) => {
   const callbackUrl = req.body.callbackUrl;
-  const jobs = await Promise.all(req.files.map(file =>
-    ocrQueue.add('ocr-job', {
-      imagePath: path.resolve(file.path),
-      callbackUrl
-    })
-  ));
-  res.json({ success: true, jobIds: jobs.map(job => job.id) });
+
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ success: false, message: 'At least one image is required' });
+  }
+
+  try {
+    const jobs = await Promise.all(req.files.map(file =>
+      ocrQueue.add('ocr-job', {
+        imagePath: path.resolve(file.path),
+        callbackUrl
+      })
+    ));
+
+    const jobIds = jobs.map(job => job.id);
+
+    return res.json({
+      success: true,
+      jobIds
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error: 'Failed to queue OCR jobs' });
+  }
 });
 
+// Job status endpoint
 app.get('/ocr/:id', authenticate, rateLimit, async (req, res) => {
-  const job = await ocrQueue.getJob(req.params.id);
-  if (!job) return res.status(404).json({ success: false });
+  const { id } = req.params;
+  const job = await ocrQueue.getJob(id);
+
+  if (!job) {
+    return res.status(404).json({ success: false, message: 'Job not found' });
+  }
+
   const state = await job.getState();
-  res.json({ success: true, status: state, result: job.returnvalue || null });
+  const result = job.returnvalue;
+
+  return res.json({
+    success: true,
+    status: state,
+    result: result || null
+  });
 });
 
-app.listen(8000, () => console.log("OCR service listening on port 8000"));
+app.listen(8000, () => {
+  console.log('OCR API server running on port 8000');
+});
