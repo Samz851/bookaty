@@ -95,6 +95,17 @@ export const resources: IResourceItem[] = [
         },
     },
     {
+        name: "bills",
+        list: "/bills",
+        create: "/create/bills",
+        show: "/bills/show/:id",
+        meta: {
+            label: i18next.t("bills.bills"),
+            icon: <DashboardOutlined />,
+            dataProviderName: "laravel"
+        },
+    },
+    {
         name: "statements",
         list: "/statements",
         create: "/statements/create",
