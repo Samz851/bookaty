@@ -33,6 +33,7 @@ import CustomCalculation from "@/pages/formula/create";
 import { CreateFormula } from "@/pages/formula/createReport";
 import { FormulasList } from "@/pages/formula/list";
 import { FormulaShow } from "@/pages/formula/show";
+import { BillsList, BillCreatePage, BillShow } from "@/pages/bills";
 
 const optionsLoader = () => {
     const identity = loadState('identity');
@@ -171,13 +172,17 @@ export const routes: ReactElement[] = [
             element={<CreateGeneralPage />}
         /> */}
     </Route>,
-    // <Route path="/orders">
-    //     <Route index element={<OrderList />} />
-    //     <Route
-    //         path="show/:id"
-    //         element={<OrderShow />}
-    //     />
-    // </Route>,
+    <Route path="/bills">
+        <Route index element={<BillsList />} />
+        <Route
+            path="show/:id"
+            element={<BillShow />}
+        />
+        <Route
+            path="create"
+            element={<BillCreatePage />}
+        />
+    </Route>,
     <Route path="/create_general">
         <Route index element={<CreateGeneralPage />} />
     </Route>
