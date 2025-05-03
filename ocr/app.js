@@ -5,7 +5,6 @@ import { ocrQueue } from './queue.js';
 import { authenticate, rateLimit } from './auth.js';
 import admin from './admin.js';
 
-app.use(admin);
 const API_KEY = process.env.API_KEY || 'default-key';
 
 // function authenticate(req, res, next) {
@@ -17,9 +16,11 @@ const API_KEY = process.env.API_KEY || 'default-key';
 // }
 
 const app = express();
+// app.use(admin);
+
 const upload = multer({ dest: 'uploads/' });
 
-app.post('/ocr', authenticate, rateLimit, upload.array('images', 10), async (req, res) => {
+app.post('/ocr', upload.array('images', 10), async (req, res) => {
   const callbackUrl = req.body.callbackUrl;
 
   if (!req.files || req.files.length === 0) {

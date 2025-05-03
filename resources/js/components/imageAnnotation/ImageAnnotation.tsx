@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { v4 as uuidv4 } from 'uuid';
+import { Button } from 'antd';
+import { useApiUrl } from '@refinedev/core';
+import { Request } from "@/helpers/httpHelper";
 
 interface WordItem {
   id: string;
@@ -26,6 +29,7 @@ interface ImageAnnotationProps {
 
 const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsChange }) => {
   const [image, setImage] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [wordItems, setWordItems] = useState<WordItem[]>(words.map(text => ({ id: uuidv4(), text, used: false })));
   const [annotations, setAnnotations] = useState<Annotation[]>([]);
   const [dragPreview, setDragPreview] = useState<{ width: number; height: number } | null>(null);
@@ -33,6 +37,7 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number } | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const apiUrl = useApiUrl('laravel');
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -40,6 +45,7 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
       const reader = new FileReader();
       reader.onload = (e) => {
         setImage(e.target?.result as string);
+        setImageFile(file);
       };
       reader.readAsDataURL(file);
     }
@@ -169,6 +175,19 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
     onAnnotationsChange?.(annotations);
   }, [annotations, onAnnotationsChange]);
 
+  const handleOcr = async () => {
+    let url = `${apiUrl}/ocr`;
+    let formData = new FormData();
+    formData.append('image', imageFile as Blob);
+    formData.append('annotations', JSON.stringify(annotations));
+    let res = await Request('POST', url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    console.log('OCR', res);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="flex flex-col gap-4">
@@ -267,6 +286,7 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
             </div>
           </div>
         </div>
+        <Button type="primary" onClick={handleOcr}>OCR</Button>
       </div>
     </DndProvider>
   );

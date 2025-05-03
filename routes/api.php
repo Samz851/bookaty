@@ -13,6 +13,7 @@ use App\Http\Controllers\Tenant\TagController;
 use App\Http\Controllers\Tenant\TaxesController;
 use App\Http\Controllers\Tenant\TransactionsController;
 use App\Http\Controllers\Tenant\UserController;
+use App\Http\Controllers\Tenant\OcrController;
 use App\Models\AccountsBranch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             Route::get('/users/autologin', [UserController::class, 'autlogin']);
             Route::apiResource('bills', BillController::class);
             Route::post('bills/{bill}/transactions', [BillController::class, 'addTransaction']);
+            Route::post('/ocr', [OcrController::class, 'ocr']);
             // Route::get('/users/authenticated', [UserController::class, 'isAuthenticated']);
         });
 //     });

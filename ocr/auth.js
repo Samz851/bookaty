@@ -2,12 +2,12 @@ import { getKey, logUsage } from './services/db.js';
 
 export function authenticate(req, res, next) {
   const key = req.headers['x-api-key'];
-  const client = getKey(key);
-  if (!key || !client) {
+  // const client = getKey(key);
+  if (!key) {
     return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
-  req.clientData = client;
-  logUsage(client.id);
+  // req.clientData = client;
+  // logUsage(client.id);
   next();
 }
 
