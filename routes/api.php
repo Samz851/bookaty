@@ -6,6 +6,7 @@ use App\Http\Controllers\Tenant\CompanyController;
 use App\Http\Controllers\Tenant\ContactController;
 use App\Http\Controllers\Tenant\FormulaController;
 use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\Tenant\BillController;
 use App\Http\Controllers\Tenant\StatementController;
 use App\Http\Controllers\Tenant\StatementTemplateController;
 use App\Http\Controllers\Tenant\TagController;
@@ -60,6 +61,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             Route::get('/removeLeafs', [AccountsBranchController::class, 'removeLeafs']);
             Route::get('/accounts/select', [AccountController::class, 'getSelect']);
             Route::get('/users/autologin', [UserController::class, 'autlogin']);
+            Route::apiResource('bills', BillController::class);
+            Route::post('bills/{bill}/transactions', [BillController::class, 'addTransaction']);
             // Route::get('/users/authenticated', [UserController::class, 'isAuthenticated']);
         });
 //     });
