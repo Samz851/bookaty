@@ -11,4 +11,4 @@ RUN npm install
 # COPY ./ocr/ .
 
 EXPOSE 8000
-CMD ["node", "run.js"]
+CMD ["node", "app.js"]
