@@ -34,6 +34,7 @@ import {
 import { IBill, IContact } from "@/interfaces";
 import { useState } from "react";
 import { useStyles } from "./styled";
+import ImageAnnotation from "@/components/imageAnnotation";
 
 type Props = {
     isOverModal?: boolean;
@@ -57,6 +58,7 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
     const { create } = useNavigation();
     const t = useTranslate();
     const { styles } = useStyles();
+    const [isScan, setIsScan] = useState(false);
 
     const { form, formProps, modalProps, close, onFinish } = useModalForm<IBill, HttpError, FormValues>({
         action: "create",
@@ -78,7 +80,10 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
             }
         ]
     });
-
+    const words = ["test", "test2", "test3"];
+    const handleAnnotationsChange = (annotations) => {
+        console.log('Annotations:', annotations);
+      };
     return (
         <Modal
             {...modalProps}
@@ -105,8 +110,18 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
             width="90vw"
             closeIcon={<LeftOutlined />}
         >
-            <Form
-                {...formProps}
+            {isScan ? (
+                <Form
+                    {...formProps}
+                    onFinish={async (values) => {
+                        console.log(values);
+                    }}
+                >
+                    <ImageAnnotation words={words} onAnnotationsChange={handleAnnotationsChange} />
+                </Form>
+            ) : (
+                <Form
+                    {...formProps}
                 onFinish={async (values) => {
                     try {
                         const data = await onFinish({
@@ -228,7 +243,8 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
                         </Button>
                     </Upload>
                 </Form.Item>
-            </Form>
+            </Form>)}
+            <Button onClick={() => setIsScan(true)}>Scan</Button>
         </Modal>
     );
 }; 

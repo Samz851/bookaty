@@ -63,6 +63,7 @@ export const routes: ReactElement[] = [
         <Route path="branches" element={<AccountsBranchCreateForm />} />
         <Route path="taxes" element={<TaxCreateForm />} />
         <Route path="tags" element={<TagCreateForm />} />
+        <Route path="bills" element={<BillCreatePage />} />
     </Route>,
     <Route path="/companies">
         <Route index element={<CompaniesList />} />
