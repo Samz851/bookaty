@@ -16,6 +16,8 @@ const API_KEY = process.env.API_KEY || 'default-key';
 // }
 
 const app = express();
+// app.use(admin);
+
 const upload = multer({ dest: 'uploads/' });
 // app.use(admin);
 
