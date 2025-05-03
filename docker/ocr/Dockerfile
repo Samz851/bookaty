@@ -6,9 +6,10 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean
 
 WORKDIR /usr/src/app
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
-# COPY ./ocr/ .
+COPY . .
 
 EXPOSE 8000
-CMD ["node", "run.js"]
+CMD ["node", "interval.js"]
+
