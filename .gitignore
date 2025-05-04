@@ -51,3 +51,4 @@ package-lock.json
 /ocr/ocr_output/*
 /ocr/uploads/*
 /ocr/node_modules
+/ocr/node_modules/*
