@@ -46,3 +46,8 @@ yarn-error.log
 composer.lock
 composer.lock.old
 package-lock.json
+/ocr/ocr_output
+/ocr/uploads
+/ocr/ocr_output/*
+/ocr/uploads/*
+/ocr/node_modules
