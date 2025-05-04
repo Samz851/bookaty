@@ -19,17 +19,10 @@ const app = express();
 // app.use(admin);
 
 const upload = multer({ dest: 'uploads/' });
-// app.use(admin);
-
-app.get('/test', (req, res) => {
-  console.log('test');
-  res.json({ success: true, message: 'Hello, world!' });
-});
 
 app.post('/ocr', upload.array('images', 10), async (req, res) => {
   const callbackUrl = req.body.callbackUrl;
-  console.log(req.files);
-  console.log(req.images);
+
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ success: false, message: 'At least one image is required' });
   }
@@ -55,7 +48,7 @@ app.post('/ocr', upload.array('images', 10), async (req, res) => {
 });
 
 // Job status endpoint
-app.get('/ocr/:id', async (req, res) => {
+app.get('/ocr/:id', authenticate, rateLimit, async (req, res) => {
   const { id } = req.params;
   const job = await ocrQueue.getJob(id);
 
