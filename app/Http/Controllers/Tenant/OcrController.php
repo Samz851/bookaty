@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Traits\HasFileUploads;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Stancl\Tenancy\Contracts\Tenant;
 
 class OcrController extends Controller
@@ -20,12 +19,11 @@ class OcrController extends Controller
             $image = $request->file('image');
             $annotations = $request->input('annotations');
             if ($fileUploadedData = $this->uploadSingleFile($image, $directory)) {
-                // $request->merge(['image' => 'storage/'.$fileUploadedData['filepath']]);
+                $request->merge(['image' => 'storage/'.$fileUploadedData['filepath']]);
                 $response = Http::attach(
                     'images', file_get_contents($request->file('image')), 'image.jpg'
-                )->post('http://ocr-service:8000/ocr', ['callbackUrl' => 'http://app.accountak.local/webhook']);
-                Log::info($response->body(), [__FILE__, __LINE__]);
-
+                )->post('http://ocr:3000/ocr', ['callbackUrl' => 'http://app.accountak.local/webhook']);
+                
                 return response()->json(['message' => 'OCR endpoint']);
             }
             return response()->json(['img' => $image, 'annotations' => $annotations, 'message' => 'OCR endpoint']);
