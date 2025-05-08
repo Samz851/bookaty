@@ -66,6 +66,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             Route::apiResource('bills', BillController::class);
             Route::post('bills/{bill}/transactions', [BillController::class, 'addTransaction']);
             Route::post('/ocr', [OcrController::class, 'ocr']);
+            Route::get('/ocr', [OcrController::class, 'getOcrJobStatus']);
             // Route::get('/users/authenticated', [UserController::class, 'isAuthenticated']);
         });
 //     });

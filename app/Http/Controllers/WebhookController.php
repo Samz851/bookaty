@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Events\WebhookReceived;
 
 class WebhookController extends Controller
 {
@@ -26,6 +27,9 @@ class WebhookController extends Controller
 
         // Process the webhook data
         $this->processWebhook($request->all());
+
+        // Broadcast the webhook data to the frontend
+        broadcast(new WebhookReceived($request->all()));
 
         // Return a success response
         return response()->json(['status' => 'success'], 200);

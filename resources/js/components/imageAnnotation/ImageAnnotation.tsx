@@ -5,7 +5,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { Button } from 'antd';
 import { useApiUrl } from '@refinedev/core';
 import { Request } from "@/helpers/httpHelper";
+import Echo from 'laravel-echo';
 
+interface WebhookData {
+  [key: string]: any;
+}
 interface WordItem {
   id: string;
   text: string;
@@ -28,6 +32,7 @@ interface ImageAnnotationProps {
 }
 
 const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsChange }) => {
+  const [webhooks, setWebhooks] = useState<WebhookData[]>([]);
   const [image, setImage] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [wordItems, setWordItems] = useState<WordItem[]>(words.map(text => ({ id: uuidv4(), text, used: false })));
@@ -38,7 +43,8 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const apiUrl = useApiUrl('laravel');
-
+  const [ocrJobId, setOcrJobId] = useState<string | null>(null);
+  const [ocrJobStatus, setOcrJobStatus] = useState<any | null>(null);
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -50,6 +56,27 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
       reader.readAsDataURL(file);
     }
   };
+  useEffect(() => {
+    // Initialize Laravel Echo
+    const echo = new Echo({
+        broadcaster: 'pusher',
+        key: import.meta.env.VITE_PUSHER_APP_KEY,
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        forceTLS: true
+    });
+
+    // Listen for webhook events
+    echo.channel('webhooks')
+        .listen('WebhookReceived', (e: { data: WebhookData }) => {
+          console.log('WebhookReceived', e.data);
+            setWebhooks(prev => [...prev, e.data]);
+        });
+
+    // Cleanup on unmount
+    return () => {
+        echo.leave('webhooks');
+    };
+}, []);
 
   const handleDragStart = (e: React.DragEvent, item: WordItem) => {
     const element = e.currentTarget as HTMLElement;
@@ -186,6 +213,18 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
       }
     });
     console.log('OCR', res);
+    setOcrJobId(res.data.jobId);
+  };
+
+  const getOcrJobStatus = async () => {
+    let url = `${apiUrl}/ocr?jobId=${ocrJobId}`;
+    let res = await Request('GET', url, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    setOcrJobStatus(res.data);
+    console.log('OCR Job Status', res.data);
   };
 
   return (
@@ -287,6 +326,7 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
           </div>
         </div>
         <Button type="primary" onClick={handleOcr}>OCR</Button>
+        <Button type="primary" onClick={getOcrJobStatus}>Get OCR Job Status</Button>
       </div>
     </DndProvider>
   );

@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.10.1",
         "meilisearch/meilisearch-php": "^1.13",
         "predis/predis": "^2.3",
+        "pusher/pusher-php-server": "^7.2",
         "stancl/tenancy": "^3.9",
         "thiagoalessio/tesseract_ocr": "^2.13",
         "tightenco/ziggy": "^2.4"
