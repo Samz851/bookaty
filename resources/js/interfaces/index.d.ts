@@ -175,8 +175,16 @@ export interface IInvoice {
 export interface IBill {
     id: number;
     date: string;
-    total_amount: number;
+    description: string;
+    amount: number;
+    status: string;
+    due_date: string;
+    notes?: string;
     vendor: IContact;
+    attachments?: {
+        name: string;
+        type: string;
+    }[];
 }
 
 export interface ITax {
@@ -380,3 +388,11 @@ export interface IStatementFormProps {
     onChange: (fields: FieldData[]) => void;
     fields: FieldData[];
   }
+
+export interface IBillFilterVariables {
+    q: string;
+    date: string;
+    due_date: string;
+    status: string;
+    vendor: IContact;
+}

@@ -6,15 +6,18 @@ use App\Http\Controllers\Tenant\CompanyController;
 use App\Http\Controllers\Tenant\ContactController;
 use App\Http\Controllers\Tenant\FormulaController;
 use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\Tenant\BillController;
 use App\Http\Controllers\Tenant\StatementController;
 use App\Http\Controllers\Tenant\StatementTemplateController;
 use App\Http\Controllers\Tenant\TagController;
 use App\Http\Controllers\Tenant\TaxesController;
 use App\Http\Controllers\Tenant\TransactionsController;
 use App\Http\Controllers\Tenant\UserController;
+use App\Http\Controllers\Tenant\OcrController;
 use App\Models\AccountsBranch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +63,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             Route::get('/removeLeafs', [AccountsBranchController::class, 'removeLeafs']);
             Route::get('/accounts/select', [AccountController::class, 'getSelect']);
             Route::get('/users/autologin', [UserController::class, 'autlogin']);
+            Route::apiResource('bills', BillController::class);
+            Route::post('bills/{bill}/transactions', [BillController::class, 'addTransaction']);
+            Route::post('/ocr', [OcrController::class, 'ocr']);
             // Route::get('/users/authenticated', [UserController::class, 'isAuthenticated']);
         });
 //     });
 // }
+
+// Webhook routes
+Route::post('webhook', [WebhookController::class, 'handle']);

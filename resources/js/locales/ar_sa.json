@@ -1,3 +1,705 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b5763957de30af8de0d49415873d025367bc426f5dfb966308ca84b9adf542e9
-size 20268
+{
+  "pages": {
+    "login": {
+      "title": "تسجيل الدخول إلى حسابك",
+      "signin": "تسجيل الدخول",
+      "signup": "اشتراك",
+      "divider": "أو",
+      "fields": {
+        "email": "بريد إلكتروني",
+        "password": "كلمة المرور"
+      },
+      "errors": {
+        "validEmail": "عنوان البريد الإلكتروني غير صالح"
+      },
+      "buttons": {
+        "submit": "تسجيل الدخول",
+        "forgotPassword": "هل نسيت كلمة السر؟",
+        "noAccount": "ليس لديك حساب؟",
+        "rememberMe": "تذكرنى"
+      }
+    },
+    "forgotPassword": {
+      "title": "نسيت كلمة السر؟",
+      "fields": {
+        "email": "بريد إلكتروني"
+      },
+      "errors": {
+        "validEmail": "عنوان البريد الإلكتروني غير صالح"
+      },
+      "buttons": {
+        "submit": "إرسال تعليمات إعادة التعيين"
+      }
+    },
+    "register": {
+      "title": "قم بالتسجيل للحصول على حسابك",
+      "fields": {
+        "email": "بريد إلكتروني",
+        "password": "كلمة المرور"
+      },
+      "errors": {
+        "validEmail": "عنوان البريد الإلكتروني غير صالح"
+      },
+      "buttons": {
+        "submit": "يسجل",
+        "haveAccount": "هل لديك حساب؟"
+      }
+    },
+    "updatePassword": {
+      "title": "تطوير كلمة السر",
+      "fields": {
+        "password": "كلمة المرور الجديدة",
+        "confirmPassword": "تأكيد كلمة المرور الجديدة"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "كلمة المرور غير مطابقة"
+      },
+      "buttons": {
+        "submit": "تحديث"
+      }
+    },
+    "error": {
+      "404": "عذرا، الصفحة التي قمت بزيارتها غير موجودة.",
+      "info": "ربما نسيت إضافة {{action}} مكون ل {{resource}} الموارد.",
+      "resource404": "هل أنت متأكد من أنك قمت بإنشاء {{resource}} الموارد.",
+      "backHome": "العودة إلى المنزل"
+    }
+  },
+  "actions": {
+    "list": "قائمة",
+    "create": "يخلق",
+    "edit": "يحرر",
+    "show": "يعرض",
+    "delete": "يمسح",
+    "cancel": "يلغي"
+  },
+  "buttons": {
+    "add": "يضيف",
+    "create": "يخلق",
+    "save": "يحفظ",
+    "logout": "تسجيل خروج",
+    "delete": "يمسح",
+    "edit": "يحرر",
+    "cancel": "يلغي",
+    "confirm": "هل أنت متأكد؟",
+    "filter": "منقي",
+    "clear": "واضح",
+    "refresh": "ينعش",
+    "show": "يعرض",
+    "undo": "الغاء التحميل",
+    "import": "يستورد",
+    "export": "يصدّر",
+    "clone": "استنساخ",
+    "accept": "يقبل",
+    "acceptAll": "قبول الكل",
+    "reject": "يرفض",
+    "rejectAll": "رفض الكل",
+    "nextStep": "التالي",
+    "previousStep": "سابق",
+    "return": "يعود"
+  },
+  "loading": "تحميل",
+  "tags": {
+    "clone": "استنساخ"
+  },
+  "table": {
+    "actions": "أجراءات",
+    "inTotal": "في المجموع"
+  },
+  "search": {
+    "placeholder": "البحث عن طريق معرف المتجر، البريد الإلكتروني، الكلمة الرئيسية",
+    "more": "أكثر"
+  },
+  "status": {
+    "enable": "يُمكَِن",
+    "disable": "إبطال"
+  },
+  "warnWhenUnsavedChanges": "هل انت متاكد انك تريد ان تغادر؟ ",
+  "notifications": {
+    "success": "ناجح",
+    "error": "خطأ (رمز الحالة: {{statusCode}})",
+    "undoable": "لديك {{seconds}} ثواني للتراجع",
+    "createSuccess": "تم إنشاؤه بنجاح {{resource}}",
+    "createError": "حدث خطأ أثناء الإنشاء {{resource}} (رمز الحالة: {{statusCode}})",
+    "deleteSuccess": "تم الحذف بنجاح {{resource}}",
+    "deleteError": "خطأ عند الحذف {{resource}} (رمز الحالة: {{statusCode}})",
+    "editSuccess": "تم التعديل بنجاح {{resource}}",
+    "editError": "حدث خطأ أثناء التحرير {{resource}} (رمز الحالة: {{statusCode}})",
+    "importProgress": "الاستيراد: {{processed}}/{{total}}"
+  },
+  "categories": {
+    "categories": "فئات",
+    "titles": {
+      "list": "فئات"
+    },
+    "fields": {
+      "id": "بطاقة تعريف",
+      "title": "عنوان",
+      "products": "منتجات",
+      "isActive": {
+        "label": "حالة",
+        "true": "مرئي",
+        "false": "غير مرئى"
+      }
+    }
+  },
+  "couriers": {
+    "couriers": "السعاة",
+    "titles": {
+      "create": "إنشاء ساعي",
+      "list": "السعاة",
+      "edit": "تحرير ساعي"
+    },
+    "fields": {
+      "id": "بطاقة تعريف",
+      "avatar": {
+        "label": "الصورة الرمزية",
+        "description": "انقر أو اسحب الصورة الرمزية إلى هذه المنطقة للتحميل."
+      },
+      "name": {
+        "label": "اسم",
+        "placeholder": "الرجاء إدخال اسم البريد السريع"
+      },
+      "surname": {
+        "label": "اسم العائلة",
+        "placeholder": "الرجاء إدخال لقب البريد السريع"
+      },
+      "gender": {
+        "label": "جنس",
+        "male": "ذكر",
+        "female": "أنثى"
+      },
+      "gsm": {
+        "label": "جي إس إم",
+        "placeholder": "الرجاء إدخال جي إس إم البريد السريع"
+      },
+      "email": {
+        "label": "بريد إلكتروني",
+        "placeholder": "الرجاء إدخال البريد الإلكتروني للساعي"
+      },
+      "address": {
+        "label": "عنوان",
+        "placeholder": "الرجاء إدخال عنوان البريد السريع"
+      },
+      "createdAt": "أنشئت في",
+      "status": {
+        "label": "حالة",
+        "Available": "متاح",
+        "Offline": "غير متصل على الانترنت",
+        "On delivery": "عند التسليم"
+      },
+      "vehicleType": {
+        "label": "نوع السيارة",
+        "placeholder": "الرجاء إدخال نوع المركبة"
+      },
+      "licensePlate": {
+        "label": "رقم المركبة",
+        "placeholder": "الرجاء إدخال معرف المركبة",
+        "patternMessage": "الرجاء إدخال معرف مركبة صالح. "
+      },
+      "rating": {
+        "label": "تقييم",
+        "placeholder": "الرجاء إدخال التقييم"
+      },
+      "images": {
+        "label": "الصور",
+        "description": "إضافة صورة المستخدم",
+        "validation": "يجب أن يكون 480x480 بكسل"
+      },
+      "store": {
+        "label": "محل",
+        "placeholder": "حدد المتجر"
+      },
+      "vehicle": {
+        "label": "عربة",
+        "placeholder": "اختر مركبة"
+      },
+      "accountNumber": {
+        "label": "رقم الحساب",
+        "placeholder": "الرجاء إدخال رقم الحساب"
+      }
+    },
+    "filter": {
+      "title": "المرشحات",
+      "name": {
+        "label": "اسم",
+        "placeholder": "اسم البحث"
+      },
+      "licensePlate": {
+        "label": "اسم",
+        "placeholder": "اسم البحث"
+      },
+      "gsm": {
+        "label": "جي إس إم",
+        "placeholder": "بحث جي إس إم"
+      },
+      "email": {
+        "label": "بريد إلكتروني",
+        "placeholder": "ابحث عن البريد الألكتروني"
+      },
+      "submit": "منقي"
+    },
+    "steps": {
+      "personal": "شخصي",
+      "company": "شركة",
+      "vehicle": "عربة"
+    },
+    "actions": {
+      "add": "إضافة ساعي جديد",
+      "edit": "تحرير البريد السريع"
+    }
+  },
+  "dashboard": {
+    "title": "لوحة القيادة",
+    "overview": {
+      "title": "ملخص"
+    },
+    "filter": {
+      "title": "المرشحات",
+      "date": {
+        "lastWeek": "الأسبوع الماضي",
+        "lastMonth": "الشهر الماضي",
+        "lastYear": "العام الماضي"
+      }
+    },
+    "deliveryMap": {
+      "title": "خريطة التسليم"
+    },
+    "orders": {
+      "title": "طلبات"
+    },
+    "revenue": {
+      "title": "ربح"
+    },
+    "totalSales": {
+      "title": "إجمالي المبيعات"
+    },
+    "dailyRevenue": {
+      "title": "الإيرادات اليومية"
+    },
+    "dailyOrders": {
+      "title": "الطلبات اليومية"
+    },
+    "newCustomers": {
+      "title": "زبائن الجدد"
+    },
+    "timeline": {
+      "title": "الجدول الزمني",
+      "orderStatuses": {
+        "pending": "تحضير الطلب",
+        "ready": "الطلب جاهز",
+        "on the way": "النظام في الطريق",
+        "delivered": "يتم تسليم الطلب",
+        "cancelled": "تم إلغاء الطلب"
+      }
+    },
+    "recentOrders": {
+      "title": "الطلبيات الأخيرة"
+    },
+    "trendingMenus": {
+      "title": "قوائم تتجه اليومية"
+    },
+    "trendingProducts": {
+      "title": "المنتجات الرائجة"
+    }
+  },
+  "enum": {
+    "orderStatuses": {
+      "Pending": "قيد الانتظار",
+      "Ready": "مستعد",
+      "On The Way": "علي الطريق",
+      "Delivered": "تم التوصيل",
+      "Cancelled": "ألغيت"
+    }
+  },
+  "orders": {
+    "orders": "طلبات",
+    "order": "طلب",
+    "titles": {
+      "deliveryMap": "خريطة التسليم",
+      "deliveryDetails": "تفاصيل التسليم",
+      "products": "منتجات",
+      "list": "طلبات",
+      "show": "طلب"
+    },
+    "fields": {
+      "orderNumber": "رقم الأمر",
+      "orderID": "رقم التعريف الخاص بالطلب",
+      "status": "حالة",
+      "store": "محل",
+      "user": "مستخدم",
+      "products": "منتجات",
+      "createdAt": "أنشئت في",
+      "amount": "كمية",
+      "itemsAmount": "{{amount}} أغراض",
+      "order": "طلب",
+      "customer": "عميل",
+      "courier": "ساعي",
+      "phone": "هاتف",
+      "deliveryTime": "موعد التسليم"
+    },
+    "filter": {
+      "title": "المرشحات",
+      "search": {
+        "label": "يبحث",
+        "placeholder": "رقم الطلب والمستخدم وما إلى ذلك."
+      },
+      "status": {
+        "label": "حالة",
+        "placeholder": "حالة الطلب"
+      },
+      "store": {
+        "label": "محل",
+        "placeholder": "متاجر البحث"
+      },
+      "user": {
+        "label": "مستخدم",
+        "placeholder": "بحث المستخدمين"
+      },
+      "customer": {
+        "label": "عميل",
+        "placeholder": "البحث عن العملاء"
+      },
+      "createdAt": {
+        "label": "أنشئت في"
+      },
+      "orderNumber": {
+        "label": "رقم الأمر",
+        "placeholder": "رقم طلب البحث"
+      },
+      "submit": "منقي"
+    },
+    "courier": {
+      "deliveryTime": "موعد التسليم",
+      "phone": "هاتف"
+    },
+    "deliverables": {
+      "deliverables": "الإنجازات",
+      "fields": {
+        "items": "أغراض",
+        "quantity": "كمية",
+        "price": "سعر",
+        "total": "المجموع"
+      },
+      "mainTotal": "المجموع الرئيسي"
+    }
+  },
+  "products": {
+    "products": "منتجات",
+    "titles": {
+      "list": "منتجات",
+      "create": "إنشاء المنتج",
+      "edit": "تحرير المنتج"
+    },
+    "fields": {
+      "id": "بطاقة تعريف",
+      "name": "اسم",
+      "description": "وصف",
+      "isActive": {
+        "label": "حالة",
+        "true": "متاح",
+        "false": "غير متوفره"
+      },
+      "price": "سعر",
+      "category": "فئة",
+      "images": {
+        "label": "الصور",
+        "description": "تحميل الصور",
+        "validation": "يجب أن يكون 1080x1080 بكسل"
+      },
+      "createdAt": "أنشئت في"
+    },
+    "filter": {
+      "title": "المرشحات",
+      "allCategories": {
+        "label": "جميع الفئات",
+        "placeholder": "جميع الفئات"
+      },
+      "id": {
+        "label": "بطاقة تعريف",
+        "placeholder": "معرف البحث"
+      },
+      "name": {
+        "label": "اسم",
+        "placeholder": "اسم البحث"
+      },
+      "description": {
+        "label": "وصف",
+        "placeholder": "وصف البحث"
+      },
+      "category": {
+        "label": "فئة",
+        "placeholder": "فئة البحث"
+      },
+      "createdAt": {
+        "label": "أنشئت في"
+      },
+      "isActive": {
+        "label": "حالة",
+        "placeholder": "حدد الحالة",
+        "true": "متاح",
+        "false": "غير متوفره"
+      }
+    },
+    "actions": {
+      "add": "إضافة منتج جديد",
+      "edit": "تحرير المنتج"
+    }
+  },
+  "reviews": {
+    "reviews": "التعليقات",
+    "titles": {
+      "list": "التعليقات"
+    },
+    "fields": {
+      "user": "مستخدم",
+      "orderId": "طلب",
+      "review": "مراجعة",
+      "rating": "تقييم"
+    }
+  },
+  "stores": {
+    "stores": "متاجر",
+    "titles": {
+      "create": "إنشاء متجر",
+      "edit": "تحرير المتجر",
+      "list": "متاجر",
+      "show": "عرض المتجر"
+    },
+    "fields": {
+      "id": "معرف المتجر",
+      "title": "عنوان",
+      "isActive": {
+        "label": "حالة",
+        "placeholder": "حدد الحالة",
+        "true": "يفتح",
+        "false": "مغلق"
+      },
+      "createdAt": "أنشئت في",
+      "address": "عنوان",
+      "email": "بريد إلكتروني",
+      "gsm": "هاتف"
+    },
+    "filter": {
+      "id": {
+        "label": "بطاقة تعريف",
+        "placeholder": "معرف البحث"
+      },
+      "title": {
+        "label": "عنوان",
+        "placeholder": "عنوان البحث"
+      },
+      "email": {
+        "label": "بريد إلكتروني",
+        "placeholder": "ابحث عن البريد الألكتروني"
+      },
+      "gsm": {
+        "label": "جي إس إم",
+        "placeholder": "بحث جي إس إم"
+      },
+      "search": {
+        "label": "يبحث",
+        "placeholder": "الاسم الأول، اسم العائلة، جي إس إم، الخ."
+      },
+      "createdAt": {
+        "label": "أنشئت في"
+      },
+      "isActive": {
+        "label": "حالة",
+        "placeholder": "حدد الحالة",
+        "true": "يفتح",
+        "false": "مغلق"
+      },
+      "submit": "منقي"
+    },
+    "buttons": {
+      "editProducts": "تحرير المنتجات",
+      "addProduct": "أضف منتج",
+      "outOfStock": "إنتهى من المخزن",
+      "edit": "تحرير المنتج"
+    },
+    "selectLocation": "اختر موقع المتجر على الخريطة",
+    "storeProducts": "منتجات المتجر",
+    "tagFilterDescription": "استخدم العلامات لتصفية بحثك",
+    "all": "الجميع",
+    "productSearch": "بحث منتوج",
+    "addNewStore": "إضافة متجر جديد"
+  },
+  "users": {
+    "users": "عملاء",
+    "titles": {
+      "edit": "تحرير العميل",
+      "list": "عملاء",
+      "show": "تفاصيل العملاء"
+    },
+    "fields": {
+      "id": "بطاقة تعريف",
+      "avatar": {
+        "label": "الصورة الرمزية",
+        "description": "انقر أو اسحب الصورة الرمزية إلى هذه المنطقة للتحميل."
+      },
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "name": "اسم",
+      "gender": {
+        "label": "جنس",
+        "Male": "ذكر",
+        "Female": "أنثى"
+      },
+      "gsm": "رقم جي إس إم",
+      "createdAt": "أنشئت في",
+      "addresses": "عناوين",
+      "isActive": {
+        "label": "حالة",
+        "true": "نشيط",
+        "false": "عاطل"
+      }
+    },
+    "filter": {
+      "title": "المرشحات",
+      "id": {
+        "label": "بطاقة تعريف",
+        "placeholder": "معرف البحث"
+      },
+      "name": {
+        "label": "اسم",
+        "placeholder": "اسم البحث"
+      },
+      "gsm": {
+        "label": "جي إس إم",
+        "placeholder": "بحث جي إس إم"
+      },
+      "search": {
+        "label": "يبحث",
+        "placeholder": "الاسم الأول، اسم العائلة، جي إس إم، الخ."
+      },
+      "createdAt": {
+        "label": "أنشئت في"
+      },
+      "gender": {
+        "label": "جنس",
+        "placeholder": "جنس",
+        "male": "ذكر",
+        "female": "أنثى"
+      },
+      "isActive": {
+        "label": "نشيط",
+        "placeholder": "حدد الحالة",
+        "true": "نعم",
+        "false": "لا"
+      },
+      "submit": "منقي"
+    },
+    "addresses": {
+      "addresses": "عناوين",
+      "address": "عنوان"
+    }
+  },
+  "accounts": {
+    "accounts": "حسابات",
+    "fields": {
+      "date": "تاريخ",
+      "name": "اسم",
+      "parent": "فرع",
+      "balance": "توازن"
+    },
+    "show": {
+      "info": "معلومات الحساب"
+    },
+    "form": {
+      "add": "إضافة حساب جديد"
+    },
+    "debit": "دَين",
+    "credit": "ائتمان"
+  },
+  "transactions": {
+    "transactions": "المعاملات",
+    "accruals": "مستحقات",
+    "payments": "المدفوعات",
+    "fields": {
+      "name": "اسم",
+      "date": "تاريخ",
+      "description": "وصف",
+      "amount": "كمية",
+      "credit_account": "حساب الائتمان",
+      "debit_account": "حساب الخصم",
+      "notes_pr": "فاتورة فاتورة",
+      "issue_payment": "إصدار الدفع؟",
+      "tax": "ضريبة"
+    },
+    "form": {
+      "add": "إضافة معاملة جديدة",
+      "add_debit": "إضافة حساب الخصم",
+      "add_credit": "إضافة حساب الائتمان",
+      "debit": "دَين",
+      "credit": "ائتمان"
+    }
+  },
+  "taxes": {
+    "taxes": "الضرائب",
+    "fields": {
+      "name": "اسم",
+      "rate": "معدل",
+      "total_collected": "مجموع المجمعة",
+      "total_paid": "مجموع المبالغ المدفوعة"
+    },
+    "form": {
+      "add": "إضافة ضريبة جديدة"
+    }
+  },
+  "companies": {
+    "companies": "شركات",
+    "fields": {
+      "name": "اسم",
+      "address": "عنوان",
+      "currency": "عملة",
+      "contact_information": "هاتف",
+      "contacts": "جهات الاتصال"
+    },
+    "form": {
+      "add": "إضافة شركة جديدة"
+    }
+  },
+  "contacts": {
+    "contacts": "جهات الاتصال",
+    "fields": {
+      "name": "اسم",
+      "email": "بريد إلكتروني",
+      "phone_number": "هاتف",
+      "type": "يكتب",
+      "company": "شركة",
+      "accounts": "حسابات"
+    },
+    "form": {
+      "add": "إضافة جهة اتصال جديدة"
+    }
+  },
+  "branches": {
+    "branches": "فروع الحسابات",
+    "fields": {
+      "name": "اسم",
+      "description": "وصف",
+      "parent": "الفرع الأم",
+      "children": "فروع الطفل",
+      "accounts": "حسابات"
+    },
+    "form": {
+      "add": "إضافة نوع جديد",
+      "first": "إنشاء النوع الأول"
+    }
+  },
+  "statements": {
+    "statements": "صياغات",
+    "fields": {
+      "name": "اسم",
+      "description": "وصف",
+      "parent": "الفرع الأم",
+      "children": "فروع الطفل",
+      "accounts": "حسابات"
+    },
+    "form": {
+      "add": "إضافة نوع جديد",
+      "first": "إنشاء النوع الأول"
+    }
+  }
+}

@@ -359,7 +359,7 @@ export const DashboardPage: React.FC = () => {
                         }
                         title={t("dashboard.recentOrders.title")}
                     >
-                        <RecentOrders />
+                        {/* <RecentOrders /> */}
                     </CardWithContent>
                 </Col>
                 <Col xl={9} lg={9} md={24} sm={24} xs={24}>
