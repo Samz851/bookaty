@@ -3,7 +3,8 @@ import fs from 'fs/promises';
 import path from 'path';
 
 export async function processOCR(imagePath) {
-  const result = await Tesseract.recognize(imagePath, 'ara');
+  const worker = await Tesseract.createWorker('ara');
+  const result = await worker.recognize(imagePath, {}, {box: true});
   await fs.unlink(imagePath); // Clean up
-  return result.data.text;
+  return result.data;
 }

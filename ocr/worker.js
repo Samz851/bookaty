@@ -2,6 +2,8 @@ import { Worker } from 'bullmq';
 import IORedis from 'ioredis';
 import { processOCR } from './processor.js';
 import axios from 'axios';
+import fs from 'fs/promises';
+import path from 'path';
 
 const connection = new IORedis('redis://redis:6379');
 
@@ -9,6 +11,12 @@ const worker = new Worker('ocrQueue', async job => {
   const { imagePath, callbackUrl } = job.data;
   const text = await processOCR(imagePath);
   console.log('text',text);
+
+  // Write text to JSON file
+  const outputPath = path.join(process.cwd(), 'ocr_output', `${job.id}.json`);
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await fs.writeFile(outputPath, JSON.stringify(text));
+  console.log(`OCR text written to ${outputPath}`);
 
   if (callbackUrl) {
     try {
