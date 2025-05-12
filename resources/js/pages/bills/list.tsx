@@ -151,7 +151,7 @@ export const BillsList = ({ children }: PropsWithChildren) => {
                 <Table.Column
                     key="amount"
                     dataIndex={["amount"]}
-                    title={t("bills.fields.amount")}
+                    title={t("bills.fields.total_amount")}
                 />
                 <Table.Column
                     key="status"

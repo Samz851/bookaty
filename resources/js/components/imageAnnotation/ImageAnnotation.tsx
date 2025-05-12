@@ -24,6 +24,7 @@ interface Annotation {
   width: number;
   height: number;
   text: string;
+  croppedImage?: string; // Base64 string of the cropped image
 }
 
 interface ImageAnnotationProps {
@@ -111,7 +112,7 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
     }));
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     if (!imageRef.current || !containerRef.current || !dragOffset) return;
 
@@ -125,13 +126,15 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
       if (dragData.type === 'annotation') {
         // Handle annotation repositioning
         if (draggedAnnotation) {
+          const updatedAnnotation = {
+            ...draggedAnnotation,
+            x,
+            y
+          };
+          const croppedAnnotation = await handleAnnotationUpdate(updatedAnnotation);
           setAnnotations(annotations.map(annotation => {
             if (annotation.id === draggedAnnotation.id) {
-              return {
-                ...annotation,
-                x,
-                y
-              };
+              return croppedAnnotation;
             }
             return annotation;
           }));
@@ -153,12 +156,11 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
           text: dragData.text
         };
 
-        if (!hasOverlap(newAnnotation)) {
-          setAnnotations([...annotations, newAnnotation]);
-          setWordItems(wordItems.map(item => 
-            item.id === dragData.id ? { ...item, used: true } : item
-          ));
-        }
+        const croppedAnnotation = await handleAnnotationUpdate(newAnnotation);
+        setAnnotations([...annotations, croppedAnnotation]);
+        setWordItems(wordItems.map(item => 
+          item.id === dragData.id ? { ...item, used: true } : item
+        ));
       }
     } catch (error) {
       console.error('Error processing drop:', error);
@@ -177,25 +179,21 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
     }
   };
 
-  const hasOverlap = (newAnnotation: Annotation) => {
-    return annotations.some(annotation => {
-      if (annotation.id === newAnnotation.id) return false; // Skip self
-      return !(
-        newAnnotation.x + newAnnotation.width < annotation.x ||
-        newAnnotation.x > annotation.x + annotation.width ||
-        newAnnotation.y + newAnnotation.height < annotation.y ||
-        newAnnotation.y > annotation.y + annotation.height
-      );
-    });
-  };
-
-  const handleResize = (id: string, newWidth: number, newHeight: number) => {
-    setAnnotations(annotations.map(annotation => {
-      if (annotation.id === id) {
-        return { ...annotation, width: newWidth, height: newHeight };
-      }
-      return annotation;
-    }));
+  const handleResize = async (id: string, newWidth: number, newHeight: number) => {
+    const updatedAnnotations = await Promise.all(
+      annotations.map(async (annotation) => {
+        if (annotation.id === id) {
+          const updatedAnnotation = {
+            ...annotation,
+            width: newWidth,
+            height: newHeight
+          };
+          return await handleAnnotationUpdate(updatedAnnotation);
+        }
+        return annotation;
+      })
+    );
+    setAnnotations(updatedAnnotations);
   };
 
   useEffect(() => {
@@ -206,7 +204,10 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
     let url = `${apiUrl}/ocr`;
     let formData = new FormData();
     formData.append('image', imageFile as Blob);
-    formData.append('annotations', JSON.stringify(annotations));
+    formData.append('annotations', JSON.stringify(annotations.map(annotation => ({
+      ...annotation,
+      croppedImage: annotation.croppedImage
+    }))));
     let res = await Request('POST', url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -225,6 +226,56 @@ const ImageAnnotation: React.FC<ImageAnnotationProps> = ({ words, onAnnotationsC
     });
     setOcrJobStatus(res.data);
     console.log('OCR Job Status', res.data);
+  };
+
+  const cropAnnotation = (annotation: Annotation): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      if (!imageRef.current) {
+        reject('No image reference found');
+        return;
+      }
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        reject('Could not get canvas context');
+        return;
+      }
+
+      // Set canvas dimensions to match annotation size
+      canvas.width = annotation.width;
+      canvas.height = annotation.height;
+
+      // Draw the cropped region
+      ctx.drawImage(
+        imageRef.current,
+        annotation.x,
+        annotation.y,
+        annotation.width,
+        annotation.height,
+        0,
+        0,
+        annotation.width,
+        annotation.height
+      );
+
+      // Convert to base64
+      const croppedImage = canvas.toDataURL('image/png');
+      resolve(croppedImage);
+    });
+  };
+
+  const handleAnnotationUpdate = async (annotation: Annotation) => {
+    try {
+      const croppedImage = await cropAnnotation(annotation);
+      return {
+        ...annotation,
+        croppedImage
+      };
+    } catch (error) {
+      console.error('Error cropping annotation:', error);
+      return annotation;
+    }
   };
 
   return (

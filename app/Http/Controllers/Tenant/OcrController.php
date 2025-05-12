@@ -21,9 +21,11 @@ class OcrController extends Controller
             $annotations = $request->input('annotations');
             if ($fileUploadedData = $this->uploadSingleFile($image, $directory)) {
                 // $request->merge(['image' => 'storage/'.$fileUploadedData['filepath']]);
-                $response = Http::attach(
-                    'images', file_get_contents($request->file('image')), 'image.jpg'
-                )->post('http://ocr-service:8000/ocr', ['callbackUrl' => 'http://laravel.test/webhook']);
+                $ocrRequestData = array_map(function($annotation) {
+                    return [
+                        $annotation['wordId'] => $annotation['croppedImage']];
+                    }, $annotations);
+                $response = Http::post('http://ocr-service:8000/ocr', ['images' => $ocrRequestData, 'callbackUrl' => 'http://laravel.test/webhook']);
                 Log::info($response->json('jobIds'), [__FILE__, __LINE__]);
                 $jobIds = $response->json('jobIds');
                 return response()->json(['message' => 'OCR endpoint', 'jobId' => $jobIds[0]]);

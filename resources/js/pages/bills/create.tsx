@@ -41,13 +41,18 @@ type Props = {
 };
 
 type FormValues = {
+    bill_number: string;
     date: string;
-    description: string;
-    amount: number;
-    status: string;
     due_date: string;
+    description: string;
+    total_amount: number;
+    tax_amount: number;
+    currency: string;
+    status: string;
+    payment_terms: string;
     notes: string;
     vendor_id: number;
+    tax_id: number;
     attachments: any[];
 };
 
@@ -80,7 +85,41 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
             }
         ]
     });
-    const words = ["test", "test2", "test3"];
+
+    const { selectProps: taxSelectProps } = useSelect({
+        resource: "taxes",
+        optionLabel: "name",
+        optionValue: "id",
+    });
+
+    const currencies = [
+        { value: 'USD', label: 'USD' },
+        { value: 'EUR', label: 'EUR' },
+        { value: 'GBP', label: 'GBP' },
+    ];
+
+    const statuses = [
+        { value: 'unpaid', label: 'Unpaid' },
+        { value: 'partially_paid', label: 'Partially Paid' },
+        { value: 'paid', label: 'Paid' },
+        { value: 'overdue', label: 'Overdue' },
+    ];
+
+    const words = [
+        "bill_number",
+        "date",
+        "due_date",
+        "description",
+        "total_amount",
+        "tax_amount",
+        "currency",
+        "status",
+        "payment_terms",
+        "notes",
+        "vendor_id",
+        "tax_id",
+        "attachments"
+    ];
     const handleAnnotationsChange = (annotations) => {
         console.log('Annotations:', annotations);
       };
@@ -125,13 +164,18 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
                 onFinish={async (values) => {
                     try {
                         const data = await onFinish({
+                            bill_number: values.bill_number,
                             date: values.date.toString(),
-                            description: values.description,
-                            amount: values.amount,
-                            status: values.status,
                             due_date: values.due_date.toString(),
+                            description: values.description,
+                            total_amount: values.total_amount,
+                            tax_amount: values.tax_amount,
+                            currency: values.currency,
+                            status: values.status,
+                            payment_terms: values.payment_terms,
                             notes: values.notes,
                             vendor_id: values.vendor_id,
+                            tax_id: values.tax_id,
                             attachments: values.attachments
                         });
 
@@ -158,6 +202,13 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
             >
                 <Row justify={"space-between"} align={"middle"} gutter={18}>
                     <Col span={16}>
+                        <Form.Item
+                            label={t("bills.fields.bill_number")}
+                            name="bill_number"
+                            rules={[{ required: true }]}
+                        >
+                            <Input />
+                        </Form.Item>
                         <Form.Item
                             label={t("bills.fields.description")}
                             name="description"
@@ -188,14 +239,20 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
                         >
                             <DatePicker style={{ width: "100%" }} />
                         </Form.Item>
+                        <Form.Item
+                            label={t("bills.fields.payment_terms")}
+                            name="payment_terms"
+                        >
+                            <Input />
+                        </Form.Item>
                     </Col>
                 </Row>
                 <Divider />
                 <Row gutter={16}>
-                    <Col span={8}>
+                    <Col span={6}>
                         <Form.Item
-                            label={t("bills.fields.amount")}
-                            name="amount"
+                            label={t("bills.fields.total_amount")}
+                            name="total_amount"
                             rules={[{ required: true }]}
                         >
                             <InputNumber
@@ -205,26 +262,55 @@ export const BillCreatePage = ({ isOverModal }: Props) => {
                             />
                         </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    <Col span={6}>
+                        <Form.Item
+                            label={t("bills.fields.tax_amount")}
+                            name="tax_amount"
+                            initialValue={0}
+                        >
+                            <InputNumber
+                                style={{ width: "100%" }}
+                                min={0}
+                                step={0.01}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={6}>
+                        <Form.Item
+                            label={t("bills.fields.currency")}
+                            name="currency"
+                            initialValue="USD"
+                        >
+                            <Select options={currencies} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={6}>
                         <Form.Item
                             label={t("bills.fields.status")}
                             name="status"
                             rules={[{ required: true }]}
+                            initialValue="unpaid"
                         >
-                            <Select>
-                                <Select.Option value="pending">Pending</Select.Option>
-                                <Select.Option value="paid">Paid</Select.Option>
-                                <Select.Option value="overdue">Overdue</Select.Option>
-                            </Select>
+                            <Select options={statuses} />
                         </Form.Item>
                     </Col>
-                    <Col span={8}>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={12}>
                         <Form.Item
                             label={t("bills.fields.vendor")}
                             name="vendor_id"
                             rules={[{ required: true }]}
                         >
                             <Select {...vendorSelectProps} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item
+                            label={t("bills.fields.tax")}
+                            name="tax_id"
+                        >
+                            <Select {...taxSelectProps} />
                         </Form.Item>
                     </Col>
                 </Row>

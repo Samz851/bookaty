@@ -731,5 +731,24 @@
       "tags": "Tags",
       "generate": "Generate Report"
     } 
+  },
+  "bills": {
+    "bills": "Bills",
+    "fields": {
+      "bill_number": "Bill Number",
+      "date": "Date",
+      "due_date": "Due Date",
+      "total_amount": "Total Amount",
+      "tax_amount": "Tax Amount",
+      "currency": "Currency",
+      "status": "Status",
+      "payment_terms": "Payment Terms",
+      "notes": "Notes",
+      "vendor": "Vendor",
+      "description": "Description"
+    },
+    "form": {
+      "add": "Add new bill"
+    }
   }
 }

@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->string('bill_number')->unique();
             $table->date('date');
-            $table->decimal('total_amount');
+            $table->date('due_date');
+            $table->decimal('total_amount', 15, 2);
+            $table->decimal('tax_amount', 15, 2)->default(0);
+            $table->string('currency', 3)->default('USD');
+            $table->string('status')->default('unpaid');
+            $table->string('payment_terms')->nullable();
+            $table->text('notes')->nullable();
+            $table->text('description')->nullable();
             $table->foreignId('vendor_id')
-                ->constrained('contacts');
+                ->constrained('companies');
+            $table->foreignId('tax_id')
+                ->nullable()
+                ->constrained('taxes');
             $table->timestamps();
         });
     }
